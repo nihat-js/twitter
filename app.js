@@ -1,18 +1,30 @@
 import Card from "./Card.js";
-import { getPosts } from "./Api.js";
-
-const posts = []
-const users = []
+import Api from "./Api.js";
 
 
-async function main(){
-	try{
-		posts = getPosts()
+// const toggleCardModal = Card.toggleCardModal
+
+// toggleCardModal()
+
+async function main() {
+	try {
+		const posts = await Api.getPosts()
+		const users = await Api.getUsers()
+		posts.forEach( (p,index) => {
+			let user = users.filter(u => u.id === p.userId)[0]
+			let card = new Card(p, user)
+			document.querySelector(".box").insertAdjacentHTML("beforebegin",card.render())
+		})
+
+		Card.attachToggleModal()
+
+		console.log({ posts, users })
+	} catch (e) {
+		console.log(e)
 	}
-	await getPosts().then((data) => {
-		console.log(data)
-	})
 }
 
 
 main()
+
+

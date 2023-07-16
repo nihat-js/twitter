@@ -1,35 +1,43 @@
-export function getPosts() {
-	return new Promise((resolve, reject) => {
-		fetch("https://ajax.test-danit.com/api/json/posts")
-			.then((data => data.json()))
-			.then((data) => {
+export default class Api {
+	static getPosts() {
+		return new Promise((resolve, reject) => {
+			fetch("https://ajax.test-danit.com/api/json/posts")
+				.then((data => data.json()))
+				.then((data) => {
 
-				resolve(data)
+					resolve(data)
+				})
+		})
+	}
+
+	static getUsers() {
+		return new Promise((resolve, reject) => {
+			fetch("https://ajax.test-danit.com/api/json/users")
+				.then((data => data.json()))
+				.then((data) => {
+
+					resolve(data)
+				})
+		})
+	}
+
+
+
+	static deletePost() {
+		return new Promise((resolve, reject) => {
+			fetch("https://ajax.test-danit.com/api/json/posts", {
+				method: "DELETE"
 			})
-	})
-}
-export function getPosts() {
-	return new Promise((resolve, reject) => {
-		fetch("https://ajax.test-danit.com/api/json/posts")
-			.then((data => data.json()))
-			.then((data) => {
+				.then((data => data.json()))
+				.then((data) => {
 
-				resolve(data)
-			})
-	})
+					resolve(data)
+				})
+		})
+	}
+
+
 }
 
 
 
-export function deletePost(){
-  return new Promise((resolve, reject) => {
-		fetch("https://ajax.test-danit.com/api/json/posts",{
-      method : "DELETE"
-    })
-			.then((data => data.json()))
-			.then((data) => {
-
-				resolve(data)
-			})
-	}) 
-}
