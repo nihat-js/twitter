@@ -1,3 +1,5 @@
+import Api from "./Api.js"
+
 export default class Card {
 	constructor(postObj,userObj){
 		this.id = postObj.id
@@ -23,16 +25,18 @@ export default class Card {
 				}else{
 					el.nextElementSibling.style.display = "block"
 					this.openModalDataId = el.nextElementSibling.dataset.id
-					console.log(this.openModalDataId)
+					// console.log(this.openModalDataId)
 				}
 			})
 		})
 	}
 
-	static attachDeletePostBtn(){
-		document.querySelector(".card__modal__btn--delete").forEach(el =>{
+	static attachDeletePostListener(){
+		document.querySelectorAll(".card__modal__btn--delete").forEach(el =>{
 			el.addEventListener("click",()=>{
-				
+				let id = el.parentElement.dataset.id
+				console.log(id)
+				Api.deletePost()
 			})
 		})
 	}
@@ -54,7 +58,7 @@ export default class Card {
 						<img  class="card__options" src="./img/menu.svg" alt=""  >
 						<div class="card__modal" data-id="${this.id}" >
 							<button class="card__modal__btn card__modal__btn--delete  "> Delete post   </button> 
-							<button class="card__modal__btn card__modal__btn--report >  Report post </button> 
+							<button class="card__modal__btn card__modal__btn--report ">  Report post </button> 
 						</div>
 				</div>
 		</header>
