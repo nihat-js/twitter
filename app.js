@@ -22,6 +22,7 @@ function renderFeed() {
 	document.querySelector(".box").innerHTML = ""
 	// console.log('posts :>> ', posts);
 	Card.setPosts = posts
+	Card.setRenderFeed = renderFeed
 	posts.forEach((p, index) => {
 		let user = users.find(u => u.id === p.userId)
 		let card = new Card(p, user)
@@ -38,37 +39,29 @@ document.getElementById("btn-show-add-modal").addEventListener("click", () => {
 	}
 })
 
-document.querySelector(".add-modal__btn--add").addEventListener('click', (e) => {
+document.querySelector(".add-modal__btn--add").addEventListener('click', async (e) => {
 	e.preventDefault()
-	console.log(users.find(u => u.id == 1).username)
-	posts.unshift({
+	let obj ={
 		id: Date.now(),
 		title: document.querySelector("input").value,
 		body: document.querySelector("textarea").value,
-		userId : 1,
-	})
-	document.querySelector("input").value = ""
-	document.querySelector("textarea").value = ""
-	document.querySelector(".add-modal").style.display = "none"
-	renderFeed()
+		userId: 1,
+	}
+	try {
+		await Api.addPost(obj)
+		posts.unshift(obj)
+		document.querySelector("input").value = ""
+		document.querySelector("textarea").value = ""
+		document.querySelector(".add-modal").style.display = "none"
+		renderFeed()
+
+	} catch (e) {
+		console.log("Error in POST Request")
+	}
 })
 
 
 
-function AddPost() {
-	try {
-		Api.AddPost()
-		posts.push({
-			id: Math.floor(Date.now()),
-			title: document.querySelector(".add-modal__title").value,
-			body: document.querySelector(".add-modal__body").value,
-			username: "nih1t",
-			name: "Nihat"
-		})
-	} catch (e) {
-		console.log("Couldn't add")
-	}
-}
 
 
 main()

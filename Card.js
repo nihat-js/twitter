@@ -9,6 +9,12 @@ export default class Card {
 	static set setPosts(posts) {
 		this.posts = posts
 	}
+	/**
+	 * @param {Function} renderFeed
+	 */
+	static set setRenderFeed(renderFeed){
+		this.renderFeed = renderFeed
+	}
 	static openEditModeId = null
 	static openModalDataId = null
 
@@ -42,13 +48,14 @@ export default class Card {
 
 	}
 
-	deletePost() {
+	async deletePost() {
 		try {
 			// posts = posts.filter(p => p.id != id) doesn't work  because filter() method creates a new array. doesn't work as pass by reference
-			Api.deletePost(id)
-			posts.splice(posts.findIndex(p => p.id == id), 1)
+			console.log(this)
+			await Api.deletePost(this.id)
+			Card.posts.splice(Card.posts.findIndex(p => p.id == this.id), 1)
 			this.openModalDataId = null
-			renderFeed()
+			Card.renderFeed()
 
 		} catch (e) {
 			console.log("Failed to delete card", e)
@@ -129,7 +136,7 @@ export default class Card {
 		let deleteBtn = document.createElement("button")
 		deleteBtn.classList = "card__modal__btn card__modal__btn--delete"
 		deleteBtn.innerText = "Delete"
-		deleteBtn.onclick = this.deletePost
+		deleteBtn.onclick = this.deletePost.bind(this)
 
 		let cardBody = document.createElement("div")
 		cardBody.classList = "card__body"
