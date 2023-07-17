@@ -21,9 +21,10 @@ async function main() {
 function renderFeed() {
 	document.querySelector(".box").innerHTML = ""
 	// console.log('posts :>> ', posts);
+	Card.setPosts = posts
 	posts.forEach((p, index) => {
 		let user = users.find(u => u.id === p.userId)
-		let card = new Card(p, user, posts)
+		let card = new Card(p, user)
 		document.querySelector(".box").append(card.render())
 	})
 

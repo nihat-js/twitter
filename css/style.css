@@ -57,6 +57,12 @@ body{
     gap : 14px;
 }
 
+.card__title{
+    font-size: 24px;
+    margin: 12px 0;
+    text-transform: uppercase;
+    font-weight: bold;
+}
 .card__text{
     margin-top: 14px;
     font-size: 20px;
@@ -143,7 +149,7 @@ body{
 
 .card__actions{
     margin-top: 12px;
-    display: flex;
+    display: none; 
     justify-content: flex-end;
 }
 .card__actions button {
