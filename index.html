@@ -6,21 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Twitter</title>
     <link rel="stylesheet" href="./css/style.css">
-    <script src="./app.js"  defer type="module" ></script>
+    <script src="./app.js" defer type="module"></script>
 </head>
 
 <body>
 
-    <div class="loading">
-        <img  class="loading__img" src="./img/loading.svg" alt="">
-    </div>
+    <form class="add-modal">
+        <div class="">
+            <input type="text" placeholder="Title" class="add-modal__title">
+            <textarea class="add-modal__body" name="" id="" cols="30" rows="10" placeholder="What are your thoughts"></textarea>
+            <button class="add-modal__btn--add"> Add </button>
+            <button> Cancel </button>
+        </div>
+    </form>
 
     <div class="container">
+        <button id="btn-show-add-modal" class="btn-add-post" > Add a Post </button>
         <div class="box">
-
         </div>
-       
     </div>
+
+    <div class="loading">
+        <img class="loading__img" src="./img/loading.svg" alt="">
+    </div>
+
+   
+
+
 </body>
 
 </html>

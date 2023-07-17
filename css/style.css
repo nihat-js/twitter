@@ -22,12 +22,12 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 90vh;
     width: 100vw;
 }
 
 .loading__img{
-    width: 200px;
+    width: 50px;
     animation: rotate 1.5s infinite ;
 }
 
@@ -101,4 +101,69 @@ body{
 
 .card__modal__btn--delete{
     color : #D0011B;
+}
+
+
+.add-modal{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.25);
+}
+
+.add-modal > div {
+    width: 500px;
+    height: 500px;
+    padding: 20px 30px;
+    border-radius: 6px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap : 10px;
+}
+.add-modal input {
+    border: none;
+    border-bottom: 2px solid #ececec;
+    outline: none;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.add-modal textarea{
+    border : 1px solid #337eac;
+    padding: 6px 10px;
+    border-radius: 6px;
+    outline : none;
+    resize: none;
+}
+
+.card__actions{
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-end;
+}
+.card__actions button {
+    padding: 10px 15px;
+    color : #fff;
+    background-color: rgb(52, 52, 147);
+    border-radius: 7px;
+    border: none;
+    margin-left: 12px;
+}
+.card__actions button:hover{
+    opacity: .85;
+}
+
+.btn-add-post{
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    border: none;
+    background-color: teal;
+    color : #fff;
+     cursor: pointer;   
 }

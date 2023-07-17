@@ -1,10 +1,14 @@
 export default class Api {
+
+
+	static baseURL = "https://ajax.test-danit.com/"
+
 	static getPosts() {
 		return new Promise((resolve, reject) => {
-			fetch("https://ajax.test-danit.com/api/json/posts")
+			fetch(this.baseURL + "api/json/posts")
 				.then((data => data.json()))
 				.then((data) => {
-
+					console.log({data})
 					resolve(data)
 				})
 		})
@@ -12,7 +16,7 @@ export default class Api {
 
 	static getUsers() {
 		return new Promise((resolve, reject) => {
-			fetch("https://ajax.test-danit.com/api/json/users")
+			fetch(this.baseURL + "api/json/users")
 				.then((data => data.json()))
 				.then((data) => {
 
@@ -23,17 +27,50 @@ export default class Api {
 
 
 
-	static deletePost() {
+	static deletePost(id) {
 		return new Promise((resolve, reject) => {
-			fetch("https://ajax.test-danit.com/api/json/posts", {
+			fetch(this.baseURL + "api/json/posts/" + id, {
 				method: "DELETE"
 			})
-				.then((data => data.json()))
-				.then((data) => {
-
-					resolve(data)
+				.then((response) => {
+					// console.log("duz deyil	")
+					if (response.ok) {
+						resolve(response)
+					} else {
+						reject(response)
+					}
 				})
 		})
+	}
+
+
+	static addPost() {
+		return new Promise((resolve, reject) => {
+			fetch(this.baseURL + "api/json/posts/" + id, {
+				method: "DELETE"
+			})
+				.then((response) => {
+					// console.log("duz deyil	")
+					if (response.ok) {
+						resolve(response)
+					} else {
+						reject(response)
+					}
+				})
+		})
+	}
+
+	static async ediPost(){
+		try {
+			let response = await fetch (this.baseURL + "api/json/posts",{ method : "PUT"})
+			if (response.ok){
+				return true
+			}else{
+				return false
+			}
+		}catch(e){
+			console.log("Couldn't edit a post",e)
+		}
 	}
 
 
