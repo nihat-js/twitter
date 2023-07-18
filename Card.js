@@ -206,9 +206,10 @@ export default class Card {
 		let btnCancel = document.createElement("button")
 		btnCancel.innerText = "Cancel"
 		btnCancel.addEventListener("click", this.handleCancel.bind(this))
-
+		btnCancel.classList = "card__cancel"
 		let btnSave = document.createElement("button")
 		btnSave.innerText = "Save"
+		btnSave.classList = "card__save"
 		btnSave.addEventListener('click', this.handleSave.bind(this))
 
 

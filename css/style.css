@@ -144,13 +144,25 @@ body{
 }
 
 .add-modal textarea{
-    border : 1px solid #337eac;
     padding: 6px 10px;
     border-radius: 6px;
     outline : none;
     resize: none;
 }
+.add-modal textarea:hover{
+    outline : 1px solid #337eac;
+}
 
+.add-modal button {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+.add-modal button:hover{
+    background-color: teal;
+    color : #fff;   
+}
 .card__actions{
     margin-top: 12px;
     display: none; 
@@ -163,10 +175,22 @@ body{
     border-radius: 7px;
     border: none;
     margin-left: 12px;
+    font-weight: bold;
 }
 .card__actions button:hover{
     opacity: .85;
 }
+
+.card__actions .card__cancel{
+    color : #999;
+    background-color: transparent;
+    cursor: pointer;
+}
+.card__actions .card__cancel:hover{
+    color : #000;
+    
+}
+
 
 .btn-add-post{
     padding: 10px 15px;

@@ -61,6 +61,10 @@ document.querySelector(".add-modal__btn--add").addEventListener('click', async (
 })
 
 
+document.querySelector(".add-modal__btn--cancel").addEventListener('click', (e)=>{
+	e.preventDefault()
+	document.querySelector(".add-modal").style.display = "none"
+})
 
 
 
