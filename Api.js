@@ -6,13 +6,13 @@ export default class Api {
 	static getPosts() {
 		return new Promise((resolve, reject) => {
 			fetch(this.baseURL + "api/json/posts")
-			.then((response => {
-				if (response.ok) {
-					return response.json()
-				} else {
-					reject("API GET POSTS ERROR")
-				}
-			}))
+				.then((response => {
+					if (response.ok) {
+						return response.json()
+					} else {
+						reject("API GET POSTS ERROR")
+					}
+				}))
 				.then((data) => {
 					// console.log({data})
 					resolve(data)
@@ -43,7 +43,7 @@ export default class Api {
 			fetch(this.baseURL + "api/json/posts/" + id, {
 				method: "DELETE"
 			})
-			.then((response) => {
+				.then((response) => {
 					console.log('gelirem')
 					if (response.ok) {
 						resolve(response)
@@ -71,9 +71,15 @@ export default class Api {
 		})
 	}
 
-	static async editPost() {
+	static async editPost(obj) {
 		try {
-			let response = await fetch(this.baseURL + "api/json/posts", { method: "PUT" })
+			let response = await fetch(this.baseURL + "api/json/posts/"+obj.id, {
+				method: "PUT",
+				body: JSON.stringify(obj),
+				headers: {
+					'Content-Type': 'application/json'
+				}	
+			})
 			if (response.ok) {
 				return true
 			} else {

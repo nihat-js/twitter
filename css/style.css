@@ -62,11 +62,15 @@ body{
     margin: 12px 0;
     text-transform: uppercase;
     font-weight: bold;
+    padding: 10px 4px ;
+
+    outline: none;
 }
 .card__text{
     margin-top: 14px;
     font-size: 20px;
     letter-spacing: .2px;
+    outline: none;
 }
 
 .card__avatar img {

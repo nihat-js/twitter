@@ -12,7 +12,7 @@ export default class Card {
 	/**
 	 * @param {Function} renderFeed
 	 */
-	static set setRenderFeed(renderFeed){
+	static set setRenderFeed(renderFeed) {
 		this.renderFeed = renderFeed
 	}
 	static openEditModeId = null
@@ -27,10 +27,10 @@ export default class Card {
 		this.username = userObj.username
 		this.name = userObj.name
 	}
-	
-	
-	
-	
+
+
+
+
 	toggleOptionsModal(e) {
 		let modal = this.element.querySelector(".card__modal")
 		let status = modal.style.display
@@ -83,13 +83,64 @@ export default class Card {
 			Card.openEditModeId = null
 		} else {
 			el.style.display = "flex"
+			let titleEl = this.element.querySelector(".card__title")
+			let textEl = this.element.querySelector(".card__text")
+
+			titleEl.contentEditable = true
+			titleEl.style.borderBottom = "2px solid #337eac"
+
+			textEl.contentEditable = true
+			textEl.style.borderBottom = "2px solid #337eac"
+
+
+
 			Card.openEditModeId = this.id
 		}
 	}
 
-	saveChanges(){
-		
+	async handleSave() {
+		let titleEl = this.element.querySelector(".card__title")
+		let textEl = this.element.querySelector(".card__text")
+		try {
+			await Api.editPost({
+				id: this.id,
+				title: this.element.querySelector(".card__title").value,
+				body: this.element.querySelector(".card__text").value,
+				username: this.username,
+				name: this.name,
+			})
+
+
+
+		} catch (e) {
+			console.log("Failed to save", e)
+		} finally {
+			document.querySelector(`.card[data-id="${this.id}"] .card__actions `).style.display = "none"
+			titleEl.contentEditable = false
+			titleEl.style.borderBottom = "none"
+
+			textEl.contentEditable = false
+			textEl.style.borderBottom = "none"
+
+		}
 	}
+
+	handleCancel() {
+		let titleEl = this.element.querySelector(".card__title")
+		let textEl = this.element.querySelector(".card__text")
+
+		titleEl.contentEditable = false
+		titleEl.style.borderBottom = "none"
+		titleEl.innerText = this.title
+
+		textEl.contentEditable = false
+		textEl.style.borderBottom = "none"
+		textEl.innerText = this.body
+
+		// console.log('b')
+		document.querySelector(`.card[data-id="${this.id}"] .card__actions `).style.display = "none"
+	}
+
 
 
 	render() {
@@ -154,9 +205,11 @@ export default class Card {
 
 		let btnCancel = document.createElement("button")
 		btnCancel.innerText = "Cancel"
+		btnCancel.addEventListener("click", this.handleCancel.bind(this))
 
 		let btnSave = document.createElement("button")
 		btnSave.innerText = "Save"
+		btnSave.addEventListener('click', this.handleSave.bind(this))
 
 
 		cardAvatar.append(avatarImg)
